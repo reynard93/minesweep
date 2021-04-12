@@ -6,7 +6,7 @@ const Tile = (props) => {
             <Button 
                 variant={props.stuff.variant} 
                 color={props.stuff.color}
-            >Tile</Button>
+            >{props.x}, {props.y}</Button>
         </div>
     );
 }
