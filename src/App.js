@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 
 
 import './App.css';
@@ -37,6 +36,7 @@ function App() {
       xCoord: col,
       yCoord: row,
       mine: false,
+      nearby: 0,
       ...tileDefault,
       tileState,
       setTileState,
@@ -65,7 +65,43 @@ function App() {
     }
   }
 
-  console.log(bombIndex);
+  tiles.forEach(tile => {
+    let currentTile = tile;
+    let x = tile.xCoord;
+    let y = tile.yCoord;
+    
+    let nearby = [];
+    nearby.push(tiles.find(tile => (tile.xCoord === x - 1 && tile.yCoord === y - 1)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x - 1 && tile.yCoord === y)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x - 1 && tile.yCoord === y + 1)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x && tile.yCoord === y - 1)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x && tile.yCoord === y + 1)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x + 1 && tile.yCoord === y - 1)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x + 1 && tile.yCoord === y)));
+    nearby.push(tiles.find(tile => (tile.xCoord === x + 1 && tile.yCoord === y + 1)));
+
+    // console.log(nearby);
+    nearby.forEach(tileCheck => {
+      if(tileCheck){
+        if(tileCheck.mine) {
+          currentTile.nearby++;
+        }
+      }
+      
+    });
+    //nearby mines rules
+    // (tile.xCoord === x - 1 && tile.yCoord === y - 1)  
+    // || (tile.xCoord === x - 1 && tile.yCoord === y)
+    // || (tile.xCoord === x - 1 && tile.yCoord === y + 1)
+    // || (tile.xCoord === x && tile.yCoord === y - 1)
+    // || (tile.xCoord === x && tile.yCoord === y + 1)
+    // || (tile.xCoord === x + 1 && tile.yCoord === y - 1)
+    // || (tile.xCoord === x + 1 && tile.yCoord === y)
+    // || (tile.xCoord === x + 1 && tile.yCoord === y + 1)
+
+    
+  });
+  
 
   return (
     <div className="App">

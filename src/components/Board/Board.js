@@ -11,6 +11,7 @@ const Board = (props) => {
                     variant={tile.variant}
                     color={tile.color}
                     mine={tile.mine}
+                    nearby={tile.nearby}
                     tileState={tile.tileState}
                     setTileState={tile.setTileState}
                     />

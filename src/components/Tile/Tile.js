@@ -13,7 +13,7 @@ const Tile = (props) => {
                     
                     }
                 }
-            >{props.x}, {props.y}</Button>
+            >{props.mine ? "m" : props.nearby ? `${props.nearby}` : "c"}</Button>
         </div>
     );
 }
