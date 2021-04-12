@@ -4,7 +4,16 @@ const Board = (props) => {
     return (
         <div className="board">
             {props.tiles.map(tile =>
-                <Tile i={tile.i} x={tile.xCoord} y={tile.yCoord} stuff={props.stuff}/>
+                <Tile 
+                    i={tile.tIndex} 
+                    x={tile.xCoord} 
+                    y={tile.yCoord} 
+                    variant={tile.variant}
+                    color={tile.color}
+                    mine={tile.mine}
+                    tileState={tile.tileState}
+                    setTileState={tile.setTileState}
+                    />
             )}
         </div>
     );

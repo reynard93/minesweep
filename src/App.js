@@ -5,21 +5,22 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 
 import Board from "./components/Board/Board";
-import { grey } from '@material-ui/core/colors';
+import Button from "@material-ui/core/Button";
 
 function App() {
 
   const tileDefault = {
     variant: "contained",
-    color: "grey",
-    disabled: false,
-    disableElevation: false,
+    color: "primary",
   }
 
+  const [tileState, setTileState] = useState({
+    disabled: false,
+    disableElevation: false,
+  });
 
+  //array for storing tiles and their data
   const tiles = [];
-
-  
   //total number of tiles
   const tileTotal = 100;
 
@@ -35,6 +36,10 @@ function App() {
       tIndex: i,
       xCoord: col,
       yCoord: row,
+      mine: false,
+      ...tileDefault,
+      tileState,
+      setTileState,
     });
     if(col < rowLength - 1) {
       col++;
@@ -44,13 +49,31 @@ function App() {
     }
   }
 
-  const [tile, setTile] = useState({
-  });
+  const bombNum = 10;
+  const bombIndex = [];
 
+  for(let c = 0; c < bombNum; c++) {
+    let index = Math.floor(Math.random() * tileTotal);
+
+    let tile = tiles.find(tile => tile.tIndex === index);
+
+    if(!(tile.mine)) {
+      tile.mine = true;
+      bombIndex.push(index);
+    } else {
+      c--;
+    }
+  }
+
+  console.log(bombIndex);
 
   return (
     <div className="App">
-      <Board stuff={tileDefault} tiles={tiles}/>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ullam sequi nisi quod iste! Aspernatur voluptatibus animi, suscipit nulla voluptas eveniet optio labore, molestiae velit voluptatem corrupti incidunt in unde!</p>
+      <p>Placeholder stuff for rules, difficulty selector, maybe top ten fastest times</p>
+
+
+      <Board tiles={tiles} />
     </div>
   );
 }

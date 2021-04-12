@@ -2,10 +2,17 @@ import Button from "@material-ui/core/Button";
 
 const Tile = (props) => {
     return (
-        <div>
+        <div className="tile">
             <Button 
-                variant={props.stuff.variant} 
-                color={props.stuff.color}
+                variant={props.variant} 
+                color={props.mine ? "secondary" : props.color}
+                disabled={props.tileState.disabled}
+                disableElevation={props.tileState.disableElevation}
+                onClick={() => {
+                    alert(`click on ${props.x}, ${props.y}`);
+                    
+                    }
+                }
             >{props.x}, {props.y}</Button>
         </div>
     );

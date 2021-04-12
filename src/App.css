@@ -38,12 +38,16 @@
 }
 
 .board {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
-
+  max-width: 55vw;
 }
 
 .board>* {
-  flex: 1 10 10%;
+  flex: 10%;
+  
+}
 
+.tile {
+  border-radius: 0px;
 }
