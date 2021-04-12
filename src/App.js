@@ -19,6 +19,7 @@ function App() {
 
   const tiles = [];
 
+  
   //total number of tiles
   const tileTotal = 100;
 

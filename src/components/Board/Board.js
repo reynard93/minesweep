@@ -3,11 +3,9 @@ import Tile from "../Tile/Tile";
 const Board = (props) => {
     return (
         <div>
-            <Tile stuff={props.stuff}/>
-            <Tile stuff={props.stuff}/>
-            <Tile stuff={props.stuff}/>
-            <Tile stuff={props.stuff}/>
-            <Tile stuff={props.stuff}/>
+            {props.tiles.map(tile =>
+                <Tile i={tile.i} x={tile.xCoord} y={tile.yCoord} stuff={props.stuff}/>
+            )}
         </div>
     );
 }
