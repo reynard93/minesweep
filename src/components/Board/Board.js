@@ -3,11 +3,11 @@ import Tile from "../Tile/Tile";
 const Board = (props) => {
     return (
         <div>
-            <Tile />
-            <Tile />
-            <Tile />
-            <Tile />
-            <Tile />
+            <Tile stuff={props.stuff}/>
+            <Tile stuff={props.stuff}/>
+            <Tile stuff={props.stuff}/>
+            <Tile stuff={props.stuff}/>
+            <Tile stuff={props.stuff}/>
         </div>
     );
 }

@@ -3,7 +3,10 @@ import Button from "@material-ui/core/Button";
 const Tile = (props) => {
     return (
         <div>
-            <Button variant="outlined" color="primary">Tile</Button>
+            <Button 
+                variant={props.stuff.variant} 
+                color={props.stuff.color}
+            >Tile</Button>
         </div>
     );
 }
