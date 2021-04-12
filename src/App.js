@@ -1,10 +1,7 @@
-
-
 import './App.css';
 import React, { useState, useEffect } from "react";
 
 import Board from "./components/Board/Board";
-import Button from "@material-ui/core/Button";
 
 function App() {
 
@@ -33,8 +30,9 @@ function App() {
   for(let i = 0; i < tileTotal; i++) {
     tiles.push({
       tIndex: i,
-      xCoord: col,
-      yCoord: row,
+      coord: {x: col, y: row},
+      // xCoord: col,
+      // yCoord: row,
       mine: false,
       nearby: 0,
       ...tileDefault,
@@ -67,27 +65,25 @@ function App() {
 
   tiles.forEach(tile => {
     let currentTile = tile;
-    let x = tile.xCoord;
-    let y = tile.yCoord;
+    let x = tile.coord.x;
+    let y = tile.coord.y;
     
     let nearby = [];
-    nearby.push(tiles.find(tile => (tile.xCoord === x - 1 && tile.yCoord === y - 1)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x - 1 && tile.yCoord === y)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x - 1 && tile.yCoord === y + 1)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x && tile.yCoord === y - 1)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x && tile.yCoord === y + 1)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x + 1 && tile.yCoord === y - 1)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x + 1 && tile.yCoord === y)));
-    nearby.push(tiles.find(tile => (tile.xCoord === x + 1 && tile.yCoord === y + 1)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x - 1 && tile.coord.y === y - 1)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x - 1 && tile.coord.y === y)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x - 1 && tile.coord.y === y + 1)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x && tile.coord.y === y - 1)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x && tile.coord.y === y + 1)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x + 1 && tile.coord.y === y - 1)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x + 1 && tile.coord.y === y)));
+    nearby.push(tiles.find(tile => (tile.coord.x === x + 1 && tile.coord.y === y + 1)));
 
-    // console.log(nearby);
     nearby.forEach(tileCheck => {
       if(tileCheck){
         if(tileCheck.mine) {
           currentTile.nearby++;
         }
       }
-      
     });
     //nearby mines rules
     // (tile.xCoord === x - 1 && tile.yCoord === y - 1)  
