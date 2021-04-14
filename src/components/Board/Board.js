@@ -1,9 +1,9 @@
 import Tile from "../Tile/Tile";
 
-const Board = (props) => {
+const Board = ({tiles, event}) => {
     return (
         <div className="board">
-            {props.tiles.map(tile =>
+            {tiles.map(tile =>
                 <Tile 
                     key={tile.tIndex}
                     i={tile.tIndex} 
@@ -14,7 +14,8 @@ const Board = (props) => {
                     mine={tile.mine}
                     nearby={tile.nearby}
                     disabled={tile.disabled}
-                    event={props.event}
+                    // don't name it event it is not a event, is a handler
+                    event={event}
                     />
             )}
         </div>

@@ -90,14 +90,11 @@ function App() {
     return tiles;
   }
   
-  let tiles = [];
   useEffect(() => {
-    tiles = generateBoardData();
-    console.log(tiles);
+    setTiles(generateBoardData());
   }, []);
   // let tiles = generateBoardData();
 
-  console.log(tiles);
   //function to send board data
   //only call at first render or at new board creation
   //sends board data to back end
@@ -111,20 +108,12 @@ function App() {
   //function updates state of those tiles
 
 
-  const [tileState, setTileState] = useState({
-    tiles
-  });
+  const [tiles, setTiles] = useState([]);
 
   function handleTileSelect(e, tileIdx) {
     e.preventDefault();
-    tiles.forEach(tile => {
-      if(tile.tIndex === tileIdx) {
-        tile.disabled = true;
-      }
-    })
-    setTileState({
-      tiles
-    });
+    let newTiles = tiles.map(tile => tile.tIndex === tileIdx ? {...tile, disabled: true} : tile);
+    setTiles(newTiles);
   }
 
 
@@ -134,8 +123,7 @@ function App() {
     <p>Placeholder stuff for rules, difficulty selector, maybe top ten fastest times</p>
     {/* <button onClick={() => tiles = generateBoardData()}>gen board</button> */}
 
-
-    <Board tiles={tileState.tiles} event={handleTileSelect}/>
+    <Board tiles={tiles} event={handleTileSelect}/>
   </div>
   );
 }
