@@ -10,11 +10,6 @@ function App() {
     color: "primary",
   }
 
-  const [tileState, setTileState] = useState({
-    disabled: false,
-    disableElevation: false,
-  });
-
   const generateBoardData = () => {
     //array for storing tiles and their data
     const tiles = [];
@@ -39,8 +34,7 @@ function App() {
         mine: false,
         nearby: 0,
         ...tileDefault,
-        tileState,
-        setTileState,
+        disabled: false,
       });
       if(col < rowLength - 1) {
         col++;
@@ -91,29 +85,57 @@ function App() {
           }
         }
       });
-      //nearby mines rules
-      // (tile.xCoord === x - 1 && tile.yCoord === y - 1)  
-      // || (tile.xCoord === x - 1 && tile.yCoord === y)
-      // || (tile.xCoord === x - 1 && tile.yCoord === y + 1)
-      // || (tile.xCoord === x && tile.yCoord === y - 1)
-      // || (tile.xCoord === x && tile.yCoord === y + 1)
-      // || (tile.xCoord === x + 1 && tile.yCoord === y - 1)
-      // || (tile.xCoord === x + 1 && tile.yCoord === y)
-      // || (tile.xCoord === x + 1 && tile.yCoord === y + 1)
     });
 
     return tiles;
   }
-    
-  let tiles = generateBoardData();
+  
+  let tiles = [];
+  useEffect(() => {
+    tiles = generateBoardData();
+    console.log(tiles);
+  }, []);
+  // let tiles = generateBoardData();
+
+  console.log(tiles);
+  //function to send board data
+  //only call at first render or at new board creation
+  //sends board data to back end
+  //back end returns board database ID
+
+
+  //function to send tile data
+  //called on clicking button
+  //sends tile Index and coordinates to server
+  //server returns json data of all tile IDs to reveal
+  //function updates state of those tiles
+
+
+  const [tileState, setTileState] = useState({
+    tiles
+  });
+
+  function handleTileSelect(e, tileIdx) {
+    e.preventDefault();
+    tiles.forEach(tile => {
+      if(tile.tIndex === tileIdx) {
+        tile.disabled = true;
+      }
+    })
+    setTileState({
+      tiles
+    });
+  }
+
 
   return (
     <div className="App">
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ullam sequi nisi quod iste! Aspernatur voluptatibus animi, suscipit nulla voluptas eveniet optio labore, molestiae velit voluptatem corrupti incidunt in unde!</p>
     <p>Placeholder stuff for rules, difficulty selector, maybe top ten fastest times</p>
+    {/* <button onClick={() => tiles = generateBoardData()}>gen board</button> */}
 
 
-    <Board tiles={tiles} />
+    <Board tiles={tileState.tiles} event={handleTileSelect}/>
   </div>
   );
 }

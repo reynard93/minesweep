@@ -6,11 +6,13 @@ const Tile = (props) => {
             <Button 
                 variant={props.variant} 
                 color={props.mine ? "secondary" : props.color}
-                disabled={props.tileState.disabled}
-                disableElevation={props.tileState.disableElevation}
-                onClick={() => {
-                    alert(`click on ${props.x}, ${props.y}`);
-                    
+                disabled={props.disabled}
+                onClick={(e) => {
+                    e.preventDefault();
+                    console.log(e.getModifierState());
+                    console.log(e);
+                    console.log(props.i);
+                    props.event(e, props.i);
                     }
                 }
             >{props.mine ? "m" : props.nearby ? `${props.nearby}` : "c"}</Button>
